@@ -1,7 +1,46 @@
-import React from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase/firebase.config";
+import { userRegister } from "../../Types";
 
 const Signup = (): JSX.Element => {
+  const [userData, setUserData] = useState<userRegister>({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleFieldFullName = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserData({
+      ...userData,
+      fullName: event.target.value,
+    });
+  };
+
+  const handlerFieldEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserData({
+      ...userData,
+      email: event.target.value,
+    });
+  };
+
+  const handlerFieldPassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserData({
+      ...userData,
+      password: event.target.value,
+    });
+  };
+
+  const handleRegister = (event: FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      console.log(userData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -22,7 +61,10 @@ const Signup = (): JSX.Element => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign up to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleRegister}
+              >
                 <div>
                   <label
                     htmlFor="fullname"
@@ -37,6 +79,7 @@ const Signup = (): JSX.Element => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Juan Montilla"
                     required
+                    onChange={handleFieldFullName}
                   />
                 </div>
                 <div>
@@ -53,6 +96,7 @@ const Signup = (): JSX.Element => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="example@mail.com"
                     required
+                    onChange={handlerFieldEmail}
                   />
                 </div>
                 <div>
@@ -69,6 +113,7 @@ const Signup = (): JSX.Element => {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
+                    onChange={handlerFieldPassword}
                   />
                 </div>
                 <div className="flex items-center justify-between">

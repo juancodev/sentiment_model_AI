@@ -18,3 +18,9 @@ export type authValuesProps = {
   logout: () => void;
   setUserSession: React.Dispatch<React.SetStateAction<User | null>>;
 }
+
+export type userRegister = {
+  fullName: string;
+  email: string;
+  password: string;
+}
