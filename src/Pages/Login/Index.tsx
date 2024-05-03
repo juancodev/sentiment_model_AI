@@ -1,12 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.config";
+import { useAuth } from "../../Hooks/useAuth";
 
 const Login = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userData, setUserData] = useState<object | null>(null);
+  const { setUserSession } = useAuth();
+  const navigate = useNavigate();
 
   const handleFieldEmail = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
@@ -26,9 +28,9 @@ const Login = (): JSX.Element => {
       signInWithEmailAndPassword(auth, email, password)
         .then((response) => {
           console.log(response.user);
-          setUserData(response.user);
+          setUserSession(response.user);
         })
-        .then(() => console.log(userData));
+        .then(() => navigate("/", { replace: true }));
     } catch (error) {
       console.log(error);
     }

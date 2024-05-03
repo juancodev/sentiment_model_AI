@@ -3,6 +3,7 @@ import { BrowserRouter, useRoutes } from "react-router-dom";
 import { Login } from "./Pages/Login/Index";
 import { Signup } from "./Pages/Signup/Index";
 import { Home } from "./Pages/Home/Index";
+import { AuthProvide } from "./Context/AuthContext";
 import "./App.css";
 
 const AppRoutes = () => {
@@ -19,7 +20,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <AppRoutes />
+        <AuthProvide>
+          <AppRoutes />
+        </AuthProvide>
       </BrowserRouter>
     </>
   );

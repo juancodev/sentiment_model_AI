@@ -1,12 +1,20 @@
+import { User } from "firebase/auth"
+
 export type firebaseConfigInitialize = {
-  apiKey: string,
-  authDomain: string,
-  projectId: string,
-  storageBucket: string,
-  messagingSenderId: string,
-  appId: string
+  apiKey: string;
+  authDomain: string;
+  projectId: string;
+  storageBucket: string;
+  messagingSenderId: string;
+  appId: string;
 }
 
-export type ChildrenProps = {
-  children: JSX.Element | JSX.Element[]
+export type childrenProps = {
+  children: JSX.Element | JSX.Element[];
+}
+
+export type authValuesProps = {
+  userSession: User | null;
+  logout: () => void;
+  setUserSession: React.Dispatch<React.SetStateAction<User | null>>;
 }

@@ -1,18 +1,26 @@
 import { createContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { ChildrenProps } from "../Types";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
+import { childrenProps, authValuesProps } from "../Types";
 import { auth } from "../Firebase/firebase.config";
 
-const ContextAuth = createContext(null);
+export const ContextAuth = createContext<authValuesProps>({
+  userSession: null,
+  logout: () => null,
+  setUserSession: () => null,
+});
 
-const AuthProvide = ({ children }: ChildrenProps) => {
-  const [userSession, setUser] = useState(null);
+export const AuthProvide = ({ children }: childrenProps) => {
+  const [userSession, setUserSession] = useState<User | null>(null);
+
+  const logout = () => {
+    signOut(auth);
+  };
 
   useEffect(() => {
     try {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          setUser(user);
+          setUserSession(user);
         }
       });
     } catch (e) {
@@ -20,7 +28,7 @@ const AuthProvide = ({ children }: ChildrenProps) => {
     }
   }, []);
 
-  const authValue = { userSession };
+  const authValue = { userSession, logout, setUserSession };
 
   return (
     <>
@@ -28,5 +36,3 @@ const AuthProvide = ({ children }: ChildrenProps) => {
     </>
   );
 };
-
-export { AuthProvide };
