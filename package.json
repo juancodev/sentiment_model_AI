@@ -12,11 +12,12 @@
   },
   "dependencies": {
     "@huggingface/inference": "^2.6.7",
-    "@xenova/transformers": "^2.17.1",
+    "csv-parse": "^5.5.5",
     "firebase": "^10.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.0"
+    "react-router-dom": "^6.23.0",
+    "react-select": "^5.8.0"
   },
   "devDependencies": {
     "@chakra-ui/react": "^2.8.2",

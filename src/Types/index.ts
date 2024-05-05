@@ -24,3 +24,7 @@ export type userRegister = {
   email: string;
   password: string;
 }
+
+export type contentProps = {
+  records: string[]
+}
