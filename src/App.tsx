@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { AuthProvide } from "./Context/AuthContext";
+import { AuthRouter } from "./Context/AuthRouter";
 import { Layout } from "./Layout/Index";
 import { Login } from "./Pages/Login/Index";
 import { Signup } from "./Pages/Signup/Index";
@@ -13,9 +14,11 @@ const AppRoutes = () => {
       path: "/",
       element: (
         <>
-          <Layout>
-            <Home />
-          </Layout>
+          <AuthRouter>
+            <Layout>
+              <Home />
+            </Layout>
+          </AuthRouter>
         </>
       ),
     },

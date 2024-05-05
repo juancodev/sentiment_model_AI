@@ -1,7 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { User, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.config";
+import { useAuth } from "../../Hooks/useAuth";
 import { userRegister } from "../../Types";
 
 const Signup = (): JSX.Element => {
@@ -10,6 +11,8 @@ const Signup = (): JSX.Element => {
     email: "",
     password: "",
   });
+  const { setUserSession } = useAuth();
+  const navigate = useNavigate();
 
   const handleFieldFullName = (event: ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -35,7 +38,12 @@ const Signup = (): JSX.Element => {
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      console.log(userData);
+      createUserWithEmailAndPassword(auth, userData.email, userData.password)
+        .then((userCredential) => {
+          const user: User = userCredential.user;
+          setUserSession(user);
+        })
+        .then(() => navigate("/", { replace: true }));
     } catch (error) {
       console.log(error);
     }
