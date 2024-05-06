@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
 import { tableProps } from "../../Types";
-import { Progress } from "flowbite-react";
+// import { Progress } from "flowbite-react";
+import { Progress } from "@chakra-ui/react";
 
 export function TableData({
   records,
@@ -22,7 +23,7 @@ export function TableData({
 
   return (
     <div className="overflow-x-auto">
-      <Table hoverable={true}>
+      <Table hoverable={true} striped={true}>
         <Table.Head>
           <Table.HeadCell>{records ? records[0][1] : "Texto"}</Table.HeadCell>
           <Table.HeadCell>
@@ -53,9 +54,7 @@ export function TableData({
         </Table.Body>
       </Table>
 
-      {/* Respuesta de la api */}
-      <></>
-      <Table hoverable={true}>
+      <Table hoverable={true} striped={true} className="mt-4">
         <Table.Head>
           <Table.HeadCell>Etiqueta de Sentimiento</Table.HeadCell>
           <Table.HeadCell>Nivel</Table.HeadCell>
@@ -70,11 +69,13 @@ export function TableData({
                 {data?.label}
               </Table.Cell>
               <Table.Cell>
-                {data.length != 0 && (
+                {data && (
                   <Progress
-                    progress={Math.round(data?.score)}
-                    size="sm"
-                    color="lime"
+                    value={Math.round(data?.score)}
+                    size="xs"
+                    max={1}
+                    min={0.0}
+                    colorScheme={"cyan"}
                   />
                 )}
               </Table.Cell>
