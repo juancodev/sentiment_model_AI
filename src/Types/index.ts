@@ -31,11 +31,11 @@ export type contentProps = {
 
 export type tableProps = {
   records?: string[];
-  filteredRecords: string[]
+  selectedOption: string
   responseData?: [
     {
       label: string;
-      score: number
+      score: number;
     }
   ];
 }

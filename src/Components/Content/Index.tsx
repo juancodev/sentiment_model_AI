@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 import { textClassification } from "@huggingface/inference";
 import { Button, Select, Spinner } from "@chakra-ui/react";
 import { TableData } from "../Table/Index";
@@ -9,22 +9,27 @@ const Content = ({ records }: contentProps): JSX.Element => {
   const [responseData, setResponseData] = useState([{}]);
   const [filteredRecords, setFilteredRecords] = useState<Array<string>>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showTable, setShowTable] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (selectedOption && records) {
-      const filtered = records.filter((record) =>
-        record.includes(selectedOption)
-      );
-      console.log(filtered);
-      setFilteredRecords(filtered);
-    }
-  }, [selectedOption, records]);
+  // useEffect(() => {
+  //   if (selectedOption && records) {
+  //     const filtered = records.filter((record) =>
+  //       record.includes(selectedOption)
+  //     );
+  //     setFilteredRecords(filtered);
+  //   }
+  //   console.log(selectedOption);
+  // }, []);
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
 
   const handleShowData = async () => {
+    const filtered = records.filter((record) =>
+      record.includes(selectedOption)
+    );
+    setFilteredRecords(filtered);
     setLoading(true);
     await textClassification({
       accessToken: import.meta.env.VITE_HF_TOKEN,
@@ -33,7 +38,7 @@ const Content = ({ records }: contentProps): JSX.Element => {
     })
       .then((data) => {
         setLoading(false);
-        console.log(data);
+        setShowTable(true);
         setResponseData(data);
       })
       .catch((err) => console.log(err));
@@ -74,11 +79,13 @@ const Content = ({ records }: contentProps): JSX.Element => {
         )}
       </div>
       <div>
-        <TableData
-          records={records}
-          filteredRecords={filteredRecords}
-          responseData={responseData}
-        />
+        {showTable && (
+          <TableData
+            records={records}
+            selectedOption={selectedOption}
+            responseData={responseData}
+          />
+        )}
       </div>
     </>
   );
