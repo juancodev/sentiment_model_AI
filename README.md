@@ -19,17 +19,20 @@ Las tecnologías utilizadas en este proyecto son 🛠️:
 
 Para iniciar el proyecto, sigue estos pasos:
 
-`git clone https://github.com/juancodev/technical_test_genios.git cd technical_test_genios`
+```sh
+$ git clone https://github.com/juancodev/technical_test_genios.git 
+$ cd technical_test_genios
+```
 
 ### Configuración con Vite
 
 1.  Instala las dependencias del proyecto:
 
-`npm install`
+`$ npm install`
 
 2.  Inicia el servidor de desarrollo:
 
-`npm run dev`
+`$ npm run dev`
 
 ¡Y listo! Tu aplicación estará corriendo en `localhost:5173`.
 
@@ -47,7 +50,15 @@ Antes de comenzar, asegúrate de tener en cuenta los siguientes requisitos:
 
 2.  Agrega las siguientes variables con sus respectivos valores:
 
-`HUGGINGFACE_TOKEN=your_huggingface_token FIREBASE_API_KEY=your_firebase_api_key FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain FIREBASE_PROJECT_ID=your_firebase_project_id FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id FIREBASE_APP_ID=your_firebase_app_id`
+```sh
+HUGGINGFACE_TOKEN=your_huggingface_token
+FIREBASE_API_KEY=your_firebase_api_key
+FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+FIREBASE_PROJECT_ID=your_firebase_project_id
+FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+FIREBASE_APP_ID=your_firebase_app_id
+```
 
 Recuerda reemplazar `your_huggingface_token`, `your_firebase_api_key`, etc., con los valores correspondientes que obtuviste al registrar tu cuenta en HuggingFace y crear tu aplicación en Firebase.
 
