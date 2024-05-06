@@ -25,6 +25,11 @@ export type userRegister = {
   password: string;
 }
 
+export type userLogin = {
+  email: string;
+  password: string;
+}
+
 export type contentProps = {
   records: string[];
 }
@@ -38,4 +43,9 @@ export type tableProps = {
       score: number;
     }
   ];
+}
+
+export type errorHandler = {
+  status: boolean,
+  message: string
 }

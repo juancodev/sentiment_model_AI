@@ -3,36 +3,61 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.config";
 import { useAuth } from "../../Hooks/useAuth";
+import logoImg from "../../Assets/Logo sin fondo JM.png";
+import { userLogin, errorHandler } from "../../Types";
 
 const Login = (): JSX.Element => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [userData, setUserData] = useState<userLogin>({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState<errorHandler>({
+    status: false,
+    message: "",
+  });
   const { setUserSession } = useAuth();
   const navigate = useNavigate();
 
   const handleFieldEmail = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      setEmail(event.target.value);
+      setUserData({
+        ...userData,
+        email: event.target.value,
+      });
     }
   };
 
   const handleFieldPassword = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      setPassword(event.target.value);
+      setUserData({
+        ...userData,
+        password: event.target.value,
+      });
     }
   };
 
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault();
-      signInWithEmailAndPassword(auth, email, password)
+      setError({
+        ...error,
+        status: false,
+        message: "",
+      });
+      signInWithEmailAndPassword(auth, userData.email, userData.password)
         .then((response) => {
-          console.log(response.user);
           setUserSession(response.user);
         })
-        .then(() => navigate("/", { replace: true }));
-    } catch (error) {
-      console.log(error);
+        .then(() => navigate("/", { replace: true }))
+        .catch((err) => {
+          setError({
+            ...error,
+            status: true,
+            message: err.message,
+          });
+        });
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -44,17 +69,13 @@ const Login = (): JSX.Element => {
             href="#"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
           >
-            <img
-              className="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-              alt="logo"
-            />
+            <img className="w-20 h-20 mr-2" src={logoImg} alt="logo" />
             Technical Test Genios
           </a>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Sign in to your account
+                Inicia Sesión con tu Cuenta
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                 <div>
@@ -62,7 +83,7 @@ const Login = (): JSX.Element => {
                     htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Your email
+                    Correo Electrónico
                   </label>
                   <input
                     type="email"
@@ -71,7 +92,6 @@ const Login = (): JSX.Element => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="example@mail.com"
                     required
-                    value={email}
                     onChange={handleFieldEmail}
                   />
                 </div>
@@ -80,7 +100,7 @@ const Login = (): JSX.Element => {
                     htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Password
+                    Contraseña
                   </label>
                   <input
                     type="password"
@@ -89,50 +109,29 @@ const Login = (): JSX.Element => {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
-                    value={password}
                     onChange={handleFieldPassword}
                   />
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="remember"
-                        aria-describedby="remember"
-                        type="checkbox"
-                        className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                        required
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="remember"
-                        className="text-gray-500 dark:text-gray-300"
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Forgot password?
-                  </a>
+                <div>
+                  {error.status && (
+                    <>
+                      <p>{error.message.slice(9)}</p>
+                    </>
+                  )}
                 </div>
                 <button
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Sign in
+                  Inicia Sesión
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet?{" "}
+                  ¿No tienes una cuenta todavía?{" "}
                   <Link
                     to={"/signup"}
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
-                    Sign up
+                    Regístrate
                   </Link>
                 </p>
               </form>
