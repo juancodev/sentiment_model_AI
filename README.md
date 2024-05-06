@@ -1,30 +1,60 @@
-# React + TypeScript + Vite
+# Technical Test Genios 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto integra la API de [HuggingFace](https://huggingface.co/docs/huggingface.js/inference/README) 🤗 con **JavaScript** para trabajar con modelos de análisis de sentimientos a partir de comentarios recopilados de las redes sociales.
 
-Currently, two official plugins are available:
+## Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Las tecnologías utilizadas en este proyecto son 🛠️:
 
-## Expanding the ESLint configuration
+- [React](https://react.dev/) - Librería.
+- [TypeScript](https://www.typescriptlang.org/) - Lenguaje de programación.
+- [Tailwindcss](https://tailwindcss.com/) - CSS framework.
+- [Vite](https://vitejs.dev/) - Entorno de desarrollo.
+- [Firebase](https://firebase.google.com/) - Base de datos.
+- [HuggingFace](https://huggingface.co/) - API.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Primeros Pasos 🏃‍♂️
 
-- Configure the top-level `parserOptions` property like this:
+### Clonación del Proyecto
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Para iniciar el proyecto, sigue estos pasos:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+`git clone https://github.com/juancodev/technical_test_genios.git cd technical_test_genios`
+
+### Configuración con Vite
+
+1.  Instala las dependencias del proyecto:
+
+`npm install`
+
+2.  Inicia el servidor de desarrollo:
+
+`npm run dev`
+
+¡Y listo! Tu aplicación estará corriendo en `localhost:5173`.
+
+## Antes de Comenzar 📝
+
+Antes de comenzar, asegúrate de tener en cuenta los siguientes requisitos:
+
+1.  **Cuenta en HuggingFace**: Necesitarás una cuenta en HuggingFace para obtener un token de autenticación que te permitirá realizar peticiones a la API de análisis de sentimientos. Visita [HuggingFace](https://huggingface.co/) para registrarte.
+
+2.  **Aplicación en Firebase**: Debes crear una aplicación en Firebase para utilizar su sistema de autenticación. Esto te permitirá registrar usuarios en tu aplicación. Visita [Firebase](https://firebase.google.com/) para crear una nueva aplicación.
+
+### Configuración de Variables de Entorno
+
+1.  Crea un archivo `.env` en la raíz del proyecto.
+
+2.  Agrega las siguientes variables con sus respectivos valores:
+
+`HUGGINGFACE_TOKEN=your_huggingface_token FIREBASE_API_KEY=your_firebase_api_key FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain FIREBASE_PROJECT_ID=your_firebase_project_id FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id FIREBASE_APP_ID=your_firebase_app_id`
+
+Recuerda reemplazar `your_huggingface_token`, `your_firebase_api_key`, etc., con los valores correspondientes que obtuviste al registrar tu cuenta en HuggingFace y crear tu aplicación en Firebase.
+
+---
+
+## Conclusión 🎉
+
+Este proyecto representa un paso adelante en la automatización del análisis de sentimientos en redes sociales, aprovechando la potencia de la API de HuggingFace y la flexibilidad de Firebase. Con una configuración adecuada y el seguimiento de los pasos descritos, estarás listo para comenzar a explorar y experimentar con las capacidades de análisis de sentimientos de este proyecto.
+
+¡Gracias por utilizar este proyecto! 😊🚀
