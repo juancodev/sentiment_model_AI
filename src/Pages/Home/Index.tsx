@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [
-        "Este es la primera versión del proyecto donde podrás subir o arrastrar un archivo CSV y podras seleccionar una opción para poder requerir su analisis de sentimiento por cada texto puesto.",
+        "Este es la primera versión del proyecto donde podrás subir o arrastrar un archivo CSV y podras seleccionar una opción para poder requerir su analisis de sentimiento por cada texto.",
       ],
       typeSpeed: 50,
       cursorChar: "_",
@@ -35,7 +35,7 @@ const Home = () => {
           </h1>
         </div>
         <div className="px-10 py-10">
-          <span className="text-2xl font-semibold" ref={el} />
+          <span className="text-2xl font-semibold italic" ref={el} />
         </div>
         <Upload />
       </Container>

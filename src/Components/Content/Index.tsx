@@ -1,15 +1,28 @@
 import { ChangeEvent, useState } from "react";
 import { textClassification } from "@huggingface/inference";
-import { Button, Select, Spinner, Container } from "@chakra-ui/react";
+import {
+  Button,
+  Select,
+  Spinner,
+  Container,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
 import { TbDatabaseSearch } from "react-icons/tb";
 import { TableData } from "../Table/Index";
-import { contentProps } from "../../Types";
+import { contentProps, errorHandler } from "../../Types";
 
 const Content = ({ records }: contentProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [responseData, setResponseData] = useState([{}]);
   const [loading, setLoading] = useState<boolean>(false);
   const [showTable, setShowTable] = useState<boolean>(false);
+  const [error, setError] = useState<errorHandler>({
+    status: false,
+    message: "",
+  });
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -28,7 +41,13 @@ const Content = ({ records }: contentProps): JSX.Element => {
         setShowTable(true);
         setResponseData(data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        setError({
+          ...error,
+          status: true,
+          message: err.message,
+        })
+      );
   };
 
   return (
@@ -38,6 +57,17 @@ const Content = ({ records }: contentProps): JSX.Element => {
         para que puedas ver su data, para eso debes darle click al botón{" "}
         <span className="text-sky-600 font-bold">Show Data.</span>{" "}
       </p>
+      {error.status === true && (
+        <Container maxW={"60%"}>
+          <Alert status="error" className="mb-3">
+            <AlertIcon />
+            <AlertTitle>{error.message}</AlertTitle>
+            <AlertDescription className="ml-4">
+              ¡Debes recargar la página!
+            </AlertDescription>
+          </Alert>
+        </Container>
+      )}
       <div className="flex mb-10">
         <Container maxW={"90%"}>
           <Select
