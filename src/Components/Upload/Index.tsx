@@ -44,9 +44,6 @@ const Upload = (): JSX.Element => {
           setRecords(recordsArray);
           console.log("Lectura de CSV Finalizada");
         });
-      // TODO: Aplicar el parseo de texto plano a un Array
-      // Aquí puedes realizar cualquier operación que necesites con el contenido
-      // Por ejemplo, podrías parsear el CSV y mostrarlo en una tabla
     };
     reader.readAsText(file);
   };

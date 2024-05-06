@@ -26,5 +26,16 @@ export type userRegister = {
 }
 
 export type contentProps = {
-  records: string[]
+  records: string[];
+}
+
+export type tableProps = {
+  records?: string[];
+  filteredRecords: string[]
+  responseData?: [
+    {
+      label: string;
+      score: number
+    }
+  ];
 }

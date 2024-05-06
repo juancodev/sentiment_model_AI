@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 import formsPlugin from "@tailwindcss/forms";
+import flowbite from "flowbite-react/tailwind"
 
 export default {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", flowbite.content()],
   darkMode: 'class',
   theme: {
     extend: {
@@ -61,5 +62,6 @@ export default {
   },
   plugins: [
     formsPlugin,
+    flowbite.plugin()
   ],
 }

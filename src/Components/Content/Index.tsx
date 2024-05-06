@@ -1,11 +1,24 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { textClassification } from "@huggingface/inference";
 import { Button, Select, Spinner } from "@chakra-ui/react";
+import { TableData } from "../Table/Index";
 import { contentProps } from "../../Types";
 
 const Content = ({ records }: contentProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<string>("");
+  const [responseData, setResponseData] = useState([{}]);
+  const [filteredRecords, setFilteredRecords] = useState<Array<string>>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (selectedOption && records) {
+      const filtered = records.filter((record) =>
+        record.includes(selectedOption)
+      );
+      console.log(filtered);
+      setFilteredRecords(filtered);
+    }
+  }, [selectedOption, records]);
 
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -21,6 +34,7 @@ const Content = ({ records }: contentProps): JSX.Element => {
       .then((data) => {
         setLoading(false);
         console.log(data);
+        setResponseData(data);
       })
       .catch((err) => console.log(err));
   };
@@ -58,6 +72,13 @@ const Content = ({ records }: contentProps): JSX.Element => {
             size="xl"
           />
         )}
+      </div>
+      <div>
+        <TableData
+          records={records}
+          filteredRecords={filteredRecords}
+          responseData={responseData}
+        />
       </div>
     </>
   );
