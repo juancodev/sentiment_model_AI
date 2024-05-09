@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import logoImg from "../../Assets/Logo sin fondo 2 JM.png";
-import profileImg from "../../Assets/profile-2.400kb.png";
-import { useAuth } from "../../Hooks/useAuth";
+import logoImg from "@/Assets/Logo sin fondo 2 JM.png";
+import profileImg from "@/Assets/profile-2.400kb.png";
+import { useAuth } from "@/Hooks/useAuth";
 
 const Header = () => {
   const { userSession, logout } = useAuth();

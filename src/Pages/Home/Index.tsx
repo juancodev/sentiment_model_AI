@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Container } from "@chakra-ui/react";
 import Typed from "typed.js";
-import { useAuth } from "../../Hooks/useAuth";
-import { Header } from "../../Components/Header/Index";
-import { Upload } from "../../Components/Upload/Index";
+import { useAuth } from "@/Hooks/useAuth";
+import { Header } from "@/Components/Header/Index";
+import { Upload } from "@/Components/Upload/Index";
 
 const Home = () => {
   const el = useRef(null);

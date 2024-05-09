@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { parse } from "csv-parse";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-import { Content } from "../Content/Index";
+import { Content } from "@/Components/Content/Index";
 
 const Upload = (): JSX.Element => {
   const [records, setRecords] = useState<Array<string>>([]);

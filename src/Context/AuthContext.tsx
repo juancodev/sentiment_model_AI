@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
-import { childrenProps, authValuesProps } from "../Types";
-import { auth } from "../Firebase/firebase.config";
+import { childrenProps, authValuesProps } from "@/Types";
+import { auth } from "@/Firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 
 export const ContextAuth = createContext<authValuesProps>({

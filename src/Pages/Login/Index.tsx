@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../Firebase/firebase.config";
+import { auth } from "@/Firebase/firebase.config";
 import { Alert, AlertIcon, AlertTitle, ChakraProvider } from "@chakra-ui/react";
-import { useAuth } from "../../Hooks/useAuth";
-import logoImg from "../../Assets/Logo sin fondo JM.png";
-import { userLogin, errorHandler } from "../../Types";
+import { useAuth } from "@/Hooks/useAuth";
+import logoImg from "@/Assets/Logo sin fondo JM.png";
+import { userLogin, errorHandler } from "@/Types";
 
 const Login = (): JSX.Element => {
   const [userData, setUserData] = useState<userLogin>({

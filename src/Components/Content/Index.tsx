@@ -1,5 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import { textClassification } from "@huggingface/inference";
+import {
+  TextClassificationOutput,
+  textClassification,
+} from "@huggingface/inference";
 import {
   Button,
   Select,
@@ -11,12 +14,15 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import { TbDatabaseSearch } from "react-icons/tb";
-import { TableData } from "../Table/Index";
-import { contentProps, errorHandler } from "../../Types";
+import { TableData } from "@/Components/Table/Index";
+import { contentProps, errorHandler } from "@/Types";
+import { responseDataFetch } from "@/Interface/Index";
 
 const Content = ({ records }: contentProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [responseData, setResponseData] = useState([{}]);
+  const [responseData, setResponseData] = useState<responseDataFetch[] | any>([
+    { label: "", score: 0 },
+  ]);
   const [loading, setLoading] = useState<boolean>(false);
   const [showTable, setShowTable] = useState<boolean>(false);
   const [error, setError] = useState<errorHandler>({
@@ -36,10 +42,10 @@ const Content = ({ records }: contentProps): JSX.Element => {
       model: "finiteautomata/beto-emotion-analysis",
       inputs: `${selectedOption}`,
     })
-      .then((data) => {
+      .then((data: TextClassificationOutput) => {
         setLoading(false);
         setShowTable(true);
-        setResponseData(data);
+        setResponseData(data as responseDataFetch[]);
       })
       .catch((err) =>
         setError({

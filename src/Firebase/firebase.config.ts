@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { firebaseConfigInitialize } from "../Types";
+import { firebaseConfigInitialize } from "@/Types";
 
 const firebaseConfig: firebaseConfigInitialize = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

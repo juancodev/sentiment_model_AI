@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table } from "flowbite-react";
-import { tableProps } from "../../Types";
-// import { Progress } from "flowbite-react";
 import { Progress } from "@chakra-ui/react";
+import { tableProps } from "@/Types";
 
 export function TableData({
   records,

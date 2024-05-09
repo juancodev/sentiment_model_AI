@@ -1,4 +1,5 @@
 import { User } from "firebase/auth"
+import { responseDataFetch } from "@/Interface/Index"
 
 export type firebaseConfigInitialize = {
   apiKey: string;
@@ -43,6 +44,12 @@ export type tableProps = {
       score: number;
     }
   ];
+}
+
+export type tablePropsData = {
+  records?: string[];
+  selectedOption: string
+  responseData?: responseDataFetch[]
 }
 
 export type errorHandler = {

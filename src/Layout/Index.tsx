@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { childrenProps } from "../Types";
+import { childrenProps } from "@/Types";
 
 const Layout = ({ children }: childrenProps) => {
   return (
