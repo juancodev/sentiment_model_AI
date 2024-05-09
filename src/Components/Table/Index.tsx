@@ -73,7 +73,7 @@ export function TableData({
                     value={Math.round(data?.score)}
                     size="xs"
                     max={1}
-                    min={0.0}
+                    min={-1}
                     colorScheme={"cyan"}
                   />
                 )}
