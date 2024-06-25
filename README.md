@@ -1,4 +1,4 @@
-# Technical Test Genios 🚀
+# Sentiment Model AI 🚀
 
 Este proyecto integra la API de [HuggingFace](https://huggingface.co/docs/huggingface.js/inference/README) 🤗 con **JavaScript** para trabajar con modelos de análisis de sentimientos a partir de comentarios recopilados de las redes sociales.
 
