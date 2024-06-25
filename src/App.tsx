@@ -1,10 +1,7 @@
 import { ReactElement } from "react";
 import { BrowserRouter, useRoutes } from "react-router-dom";
 import { AuthProvide } from "@/Context/AuthContext";
-import { AuthRouter } from "@/Context/AuthRouter";
 import { Layout } from "@/Layout/Index";
-import { Login } from "@/Pages/Login/Index";
-import { Signup } from "@/Pages/Signup/Index";
 import { Home } from "@/Pages/Home/Index";
 import "./App.css";
 
@@ -14,16 +11,12 @@ const AppRoutes = () => {
       path: "/",
       element: (
         <>
-          <AuthRouter>
-            <Layout>
-              <Home />
-            </Layout>
-          </AuthRouter>
+          <Layout>
+            <Home />
+          </Layout>
         </>
       ),
     },
-    { path: "/login", element: <Login /> },
-    { path: "/signup", element: <Signup /> },
   ]);
 
   return routes;

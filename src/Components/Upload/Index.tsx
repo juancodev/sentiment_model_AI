@@ -1,11 +1,25 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef, useEffect } from "react";
 import { parse } from "csv-parse";
+import ScrollReveal from "scrollreveal";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { Content } from "@/Components/Content/Index";
 
 const Upload = (): JSX.Element => {
   const [records, setRecords] = useState<Array<string>>([]);
   const [fileData, setFileData] = useState<File>();
+  const formCSV = useRef(null);
+
+  useEffect(() => {
+    if (formCSV.current) {
+      const config = {
+        distance: "18%",
+        origin: "top",
+        opacity: 0.4,
+        duration: 1500,
+      };
+      ScrollReveal().reveal(formCSV.current, config);
+    }
+  }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -51,7 +65,7 @@ const Upload = (): JSX.Element => {
   if (fileData) {
     return (
       <>
-        <form>
+        <form ref={formCSV}>
           <div className="col-span-full">
             <label
               htmlFor="cover-photo"
@@ -96,7 +110,7 @@ const Upload = (): JSX.Element => {
   } else {
     return (
       <>
-        <form>
+        <form ref={formCSV}>
           <div className="col-span-full">
             <label
               htmlFor="cover-photo"

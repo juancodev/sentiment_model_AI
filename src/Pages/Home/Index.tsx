@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import { Container } from "@chakra-ui/react";
 import Typed from "typed.js";
+import ScrollReveal from "scrollreveal";
 import { useAuth } from "@/Hooks/useAuth";
 import { Header } from "@/Components/Header/Index";
 import { Upload } from "@/Components/Upload/Index";
 
 const Home = () => {
   const el = useRef(null);
+  const title = useRef(null);
   const { userSession } = useAuth();
   console.log(userSession);
 
@@ -25,12 +27,27 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (title.current && el.current) {
+      const config = {
+        distance: "50%",
+        origin: "top",
+        opacity: 0.4,
+      };
+      ScrollReveal().reveal(title.current, config);
+      ScrollReveal().reveal(el.current, config);
+    }
+  }, []);
+
   return (
     <>
       <Header />
       <Container maxW={"95%"}>
         <div>
-          <h1 className="text-5xl text-center my-10 font-bold">
+          <h1
+            ref={title}
+            className="text-5xl text-center my-10 font-bold title"
+          >
             Bienvenido, Usuario 👋🏼
           </h1>
         </div>
